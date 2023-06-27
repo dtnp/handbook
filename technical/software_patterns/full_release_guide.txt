@@ -1,0 +1,275 @@
+    Announcements 📢
+        What is considered "downtime":
+        How to announce downtime:
+        Example of how to make an announcement for downtime in the "dev-announcements" slack channel: 
+    Who Should be Involved?
+        Who is on call currently:
+    Prepping for a Deploy 👨‍💻
+        Steps for Deployment:
+            When to start the process
+            Open the Deploy Board
+            Open the "Merge Request" links
+            Have our QA Engineers test the release branches on Staging
+    Pushing to Production 🚂 
+        Verify that everything is ready for launch
+        Official Production Train Steps
+        Deploy Instructions for ExpressTrade (trade.opskins.com)
+        Deploy Instructions for OPSkins (opskins.com)
+        Deploy Instructions for VGO Marketing Site (vgo.gg)
+        Verify that all the code changes worked
+        Final Steps
+        Jobs Done!
+    Resolving issues with the Deploy 🔧
+    Hot Fixes 🌶️
+
+Useful Links
+
+    Our Branching Strategy
+
+    Jira Deploy Board
+
+    Production Bridge
+
+    Staging Jenkins Console
+
+    Production Jenkins Console
+
+        Production Jenkins Deployment Guide
+
+
+Announcements 📢
+
+All deploys which will involve downtime must be announced to the Customer Sales people to give them time to notify the public.  Normally public notification happens in the form of Tweets.
+What is considered "downtime":
+
+    All database changes that could cause the site to not function requires the site be put in "maintenance" mode.
+    New features that need to be tested on production specifically
+    Anything that involves multiple teams working together on a launch (usually involves a "Go Live" checklist)
+
+How to announce downtime:
+
+    Please use the slack channel "dev-announcements" to clearly communicate with the rest of the company with what is going on & and if anything major was shipped.
+    You must announce 30 minutes in advance any downtime or inconvenience (e.g. maintenance mode). Feel free to set a timer for this (Simply Google "30 min timer").
+
+
+Example of how to make an announcement for downtime in the "dev-announcements" slack channel:
+
+@here ExpressTrade will be put in maintenance mode in 30 minutes.  Downtime will last for approximately 10 minutes.
+@here OPSkins.com will be put in maintenance mode in 30 minutes.  Downtime will last for approximately 10 minutes.
+Who Should be Involved?
+Who is on call currently:
+
+There are multiple people on the OPS team who are on call 24/7 for "Severity 1" issues. These are often issues that can be solved without the help from developers.
+
+For "Severity 2" problems, a Sr Developer is usually brought in to the conversation.  The person on call does not NEED to be notified for every deploy.  Best practice should involve letting the person on call know if something major is going out to prepare them for potential outages later on.  Engineering Google Calendar
+
+To find out who is on call, see the title bar in the slack #eng-backend-chapter channel.
+Prepping for a Deploy 👨‍💻
+
+We want to minimize wasted time for as many colleagues as possible, and minimize the amount of people on the Zoom Train Bridge (video chat).
+Steps for Deployment:
+
+    When to start the process
+        Before a ticket goes live, it usually needs to:
+            Be tested by QA (basic and regression tests) - This step can be ignored for BC (Business Critical) tickets, or if changes are small/simple.  The developer/team is held accountable.
+            Be approved by the team lead that a deployment is ready to go out (keep inner team communications going).
+        Release notes should be prepared.  TODO: Link to good release note template
+            Release notes are just a confluence page following a general template 
+            It is the Devops team members job to setup the release notes
+            It is the Developer and QA's members job to fill in any missing details and compare against the release tickets to make sure no steps are missed
+        All people involved in the deploy should read over the release notes and be prepared for testing the production site to make sure things worked.
+        Discuss the ORDER OF OPERATION
+            Normally, database changes should happen after code changes, but that is subject to change per ticket
+            If multiple tickets are being release, or multiple sites involved (trade and opskins), make sure you know which to release first
+
+Open the Deploy Board
+
+    Move (Click and Drag) all the tickets "Ready for Deploy" into "Deploy in Progress"
+
+    Read over all the ticket descriptions to get a quick understanding of what to expect in each ticket
+        The information in these tickets should have been moved to the release notes already
+
+    Take note of any "Schema Chang Required", "Translation Required", or additional "Deploy Instructions"
+        Schema Changes might require the websites to be put into "maintenance mode" which locks the site down for users to use.  Details Below
+        Translations require additional manual work to be done before the production launch, and it an be time consuming.  Details Below
+        Deploy Instructions might be confusing.  Details Below
+
+Open the "Merge Request" links
+
+    Locate the "Merge Request" links in the ticket details.  Sometimes they can be found in the comments if there are multiple merge requests
+    Click on "Changes" within the gitlab window, and search for any "schema_updates".  Sometimes developers forget to choose the correct "Schema Change Required" option.
+    Quickly browse through the ticket and look for anything else that might be cause for concern.
+
+Have our QA Engineers test the release branches on Staging
+
+    Message them in #qa-questions
+    *Note: This step is optional.  It is up to the ticket owner to see if QA should be involved.
+
+Pushing to Production 🚂 
+
+The goal is to not waste any time for the people who are normally on the call. 
+
+    Verify that everything is ready for launch
+        If "Maintenance Mode" (downtime) is needed, please make the announcement 30 - 45 minutes BEFORE official launch
+            Announcement to Customer Service that the site will be going down for maintenance:
+
+            An example announcement in the "dev-announcements" slack channel:
+
+            @here ExpressTrade will be put in maintenance mode in 30 minutes.  Downtime will last for approximately 10 minutes.
+        15 minutes before official launch, verify that everything is prepared for production
+            Make sure that testing on staging has passed all checks (can be ignored based on ticket owner / team decision).
+            Make sure you understand the special deploy instructions, and if unclear, make sure you discussed all special deploy requirements with the ticket owners
+            Verify and understand if schema changes are required, and work with Net/DevOps team members.
+        At this point, you should be familiar with all the tickets, read the release notes, and are ready to push the changes into production.
+            If something comes up after the official announcement is mage, message everyone in "#devops-questions" to let the know of the delay
+    Official Production Train Steps
+        Hop on the Deploy Zoom Bridge with our Net/DevOps team
+        Share your screen with the team.
+        Explain to everyone short summaries of the tickets going out and any significant impacts we should be on the lookout for.
+        We are now ready to deploy! 🚀
+    Deploy Instructions for ExpressTrade (trade.opskins.com)
+        Open Gitlab and get to the ticket which will be launched
+            If you cannot remember the address, or you closed the browser window/tab, you can find it here: https://monica.mcmxi.services/vgo/www/branches
+            Verify that you are in the correct project - We create deploy branches with similar names across projects
+                Look for the word "vgo/www" in the URL
+                Look for the breadcrumb trail of "vgo > www > Repository" near the top of the page
+        Click on the "Merge" button to merge the ticket branch into "master"
+            ONLY Check the "Remove source branch when merge request is accepted." option
+            DO NOT check the "Squash commits".  By not squashing, it makes it easier for us to revert changes later if needed.
+        Maintenance Mode - If we have schema/database changes, or major updates which require maintenance mode:
+            Open the Production Jenkins job here.
+            Double check with the Net/DevOps teams what should be done, but usually you will only do one change at a time in Jenkins
+            If you have any questions / issues / concerns, discuss with the Net/DevOps team, they will walk you through what to do.
+        Follow the instructions in the release notes to ensure all steps are taken in the correct order
+        Jenkin Deployment Process
+            Useful Links:
+                You can go directly to the Build Page with this link
+                The official Production Jenkins homepage can be found here
+                The official Production Jenkins scripts can be found here
+                    This is where the "Maintenance Mode" script can be found
+                    This is where the "Update DB Schema" script can be found
+                The official Production Jenkins "rollback" (or changing web node clusters) page can be found here
+            Build the project! link here
+        Cron Runner Updates
+            This is a manual process for now
+            You will need access to the "Jump Server" for this process.  If you do not have access, please discuss this with Net/DevOps
+
+            Connect and manually update the Cron Runner code base:
+            cd /jumps/aws/trade/prod/
+            ./cron-runner
+            cd /var/www/html && git checkout master && git pull
+        See Step #6 now to have the QA Team begin testing the changes
+    Deploy Instructions for OPSkins (opskins.com)
+        Open Gitlab and get to the ticket which will be launched
+            If you cannot remember the address, or you closed the browser window/tab, you can find it here: https://monica.mcmxi.services/opskins/opskins-www/branches
+            Verify that you are in the correct project - We create deploy branches with similar names across projects
+                Look for the word "opskins/opskins-www" in the URL
+                Look for the breadcrumb trail of "OPSkins > opskins-www > Repository" near the top of the page
+        Click on the "Merge" button to merge the ticket branch into "master"
+            ONLY Check the "Remove source branch when merge request is accepted." option
+            DO NOT check the "Squash commits".  By not squashing, it makes it easier for us to revert changes later if needed.
+
+        Translations (if there are any):
+
+            This is a manual step that should be done from your local environment
+
+            The following steps should be done from the ROOT of the OPSkins project
+
+            You will need a "google_api.ini" file.  Please ask for a copy of this if you don't currently have a copy.  The file can be in the root directory, or in the "Core/Localization/Scripts/google_api.ini" directory
+
+            The 3rd step, ending with "-g"  is optional if you do not want Google Translate to update the new strings, else just follow the prompts and answer anything that is asked.
+            git checkout master && git pull
+            php Core/Localization/Scripts/localization.php -s
+            php Core/Localization/Scripts/localization.php -g
+            git commit -a -m "Update localization files" && git push
+
+            If new localization files were added, you'll need to manually add those with git as -a doesn't work in that case.
+        Jenkin Deployment Process
+            Build Opskins: Opskins Build
+
+            Build Admeen if necessary: Admeen Build
+            Build Cron Runner if necessary: Cron Runner Build
+        Deploy the database changes to the production OPSkins environment
+            Database Schema Updates includes directions on merging schema into master
+            This is a manual process for now
+            You will need access to the "Jump Server" for this process.  If you do not have access, please discuss this with Net/DevOps
+
+            Connect and manually update the OPSkins code base:
+            ~/jumps/wwwssh 1
+            sudo -u www -i
+            cd /ssd/wwwdata/public_html/scripts && php update_database_schema.php
+            This will send alerts to the "#devs" channel on Slack.
+            Monitor the script output to make sure it succeeds.
+
+        API Docs for OPSkins (repo: opskins/api-documentation):
+
+            Skip this if no API documentation needs to be updated, else
+            This is a manual process for now
+            You will need access to the "Jump Server" for this process.  If you do not have access, please discuss this with Net/DevOps
+
+            Connect and manually update the OPSkins API Documentation:
+            ./jumps/digitalocean/opskins/doc-www
+            sudo -u www -i
+            cd /var/www/public_html/api-documentation && git pull && ./api.sh -bpub && ./api.sh -bpriv
+    Deploy Instructions for VGO Marketing Site (vgo.gg)
+
+        Currently no develop branch for this site because of low volume of code changes.
+
+        This site has no backend, it's built entirely with React.
+
+        Jenkin Deployment Process
+
+            Useful Links:
+
+                You can go directly to the Build Page with this link
+
+                The official Production Jenkins homepage can be found here
+
+            Build the project! link here
+    Verify that all the code changes worked
+        Once Trade or Opskins is completed, kindly ask our QA team to do smoke tests on production. 
+
+        You can help the process by:
+
+            Make sure that you can still load the website
+
+            Make sure that you can still load the website log into the website
+
+            Speed up the testing process by trying to see if the deployed tickets are working correctly
+    Final Steps
+
+        If everything looks good in prod, thank everyone and hop off the production call
+        Reopen the Production Deploy Board: https://jira.mcmxi.services/secure/RapidBoard.jspa?rapidView=32
+        Move them from "Deploy in Progress" to "Done" but do the following for each ticket
+            Re-read the ticket and make sure that it was correctly merged
+            Re-read the release notes to make sure everything was completed
+            Was all API Doc updates that needs to be merged in?
+        If anything special was done (like a backfill script ran), feel free to leave a comment on the ticket for the record, e.g. backfill script full output.
+
+        Bring the Git "develop" branch up-to-date with "master"
+
+            Run this in the root of the "docker-env" repository
+            make trade-update-develop make opskins-update-develop
+    Jobs Done!
+
+        Nice job!!! 👏
+
+Resolving issues with the Deploy 🔧
+
+    You deployed without merging anything into master (smile)
+        Before you try to merge & deploy; you must change clusters / do a roll-back, here.
+        Now just merge the branch and do a normal deploy.
+
+
+    Emergency Roll Backs 🚨
+        Since we utilize A & B clusters, if the code blows up in production, you can quickly switch to a cluster that doesn't have the recently released changes.
+            Here: https://jenkins.mcmxi.services/job/prod-TRADE-Switch-Clusters-(code-rollback)/
+
+Hot Fixes 🌶️
+
+    Hotfixes should be branched off of master & also merged straight into master.
+
+        Or commited straight into master (tongue)
+    After deploying, make sure to update the develop branch with changes in master:
+        make trade-update-develop
+        make opskins-update-develop

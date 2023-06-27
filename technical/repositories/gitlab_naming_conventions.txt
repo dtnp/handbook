@@ -1,0 +1,104 @@
+Project Overview:
+
+- Every git project should have an overview made for it with a basic description of what it is
+- It is ok to say "Details in the readme" (with a link) as well if the project has a readme that is updated far more frequently.
+
+
+Gitlab Project Naming Conventions
+---------------------------------
+Pattern:
+group-type/parentprojectname-childprojectname
+group-type/parentprojectname (if no child/subproject name exists)
+
+
+Group Types:
+- services 			- These are individual services we are working on.  Specifically this will be for web/api software services related to the CORE of XXX (not blockchain, or case sites)
+- blockchain		- blockchain related code/services
+- utilites 			- one shot tools, scripts, utilities worth sharing / keeping
+- it 				- IT, infrastructure, devops specific projects and tooling
+- quality-assuance 	- QA Projects
+- documentation		- Documentation based projects
+- marketing			- One shot marketing sites, vIRLs, noris services, WET marketing, etc.
+- case-sites		- dedicated to case sites we own/maintain/templatize
+
+
+Examples:
+services / XXX-core
+services / trade-core
+services / all-access-login
+services / all-access-identity-management
+services / all-access-oauth
+services / webhooks
+utilities / php-general-tools
+utilities / node-general-tools
+utilities / cpp-general-tools
+devops / wib
+devops / iac-ansible
+quality-assuance / dodo
+quality-assuance / cuckoo
+quality-assuance / eos-api-qa-framework
+documentation / XXX-docs
+documentation / trade-docs
+marketing / vgo
+marketing / virls
+blockchain / eos-explorer
+blockchain / eos-oracle
+blockchain / eos-governance
+blockchain / eth-vgo
+case-sites / vcase
+
+
+Parent Project Name Examples (on the web/ecommerce side)
+All Access = all-access
+Payment Services = "payment"
+Item Definition Service = "item-definition"
+Gift Box Management Service = "gift-box-management"
+Item Creation Service = "item-creation"
+Item Virtualization Service = "item-virtualization"
+Item Authentication Service = "item-authentication"
+Item Pricing Service = "item-pricing"
+Item Showcase Service = "item-showcase"
+Item Lifecycle Service = "item-lifecycle"
+Item Redemption Service = "item-redemption"
+Item Discovery Service = "item-discovery"
+Item Marketplace Service = "item-marketplace"
+Item Swap Service = "item-swap"
+
+
+
+Questions:
+- Do we want a "legacy" folder for old code, or monoliths like XXX/trade until we split them apart into cleaner smaller services?
+
+
+
+
+
+
+
+
+
+Ticket Naming Structure
+-----------------------
+Pattern:
+ticket-number/type/short-description
+
+Types:
+- feature      	Feature I'm adding or expanding.  Software related
+- it			IT, dev/net ops, permissions, setting up servers, etc.
+- qa			Quality Assurance specific tickets
+- ib			Integration Branch for stories / epics
+- doc			Tickets specifically for documentation
+- bug       	Bug fixes
+- design       	New mockups/designs
+- junk      	Throwaway branch created to experiment
+- wip       	Work in progress - Starting a piece of code or somethign that won't be finished for a while (or even after the ticket is completed)
+
+Examples:
+XXX-120/ib/item_creation_server
+XXX-121/it/standing_up_microservice_infrastructure
+XXX-122/feature/building_out_new_db
+XXX-123/feature/new_api_structure
+XXX-124/feature/migrate_old_data_to_new_db
+XXX-125/wip/jumpstart_item_server_front_end_placeholder
+...
+XXX-137/bug/fix_and_reimport_data

@@ -1,0 +1,57 @@
+    What is Semantic Versioning
+        Chrome Example
+    Public Communication
+    Release Notes
+    Release Version
+        Internal Version
+        External Versioning
+
+What is Semantic Versioning
+
+Quoting semver.org, semantic versioning works like this:
+
+    Given a version number MAJOR.MINOR.PATCH, increment the:
+
+    MAJOR version when you make incompatible API changes, MINOR version when you add functionality in a backwards-compatible manner, and PATCH version when you make backwards-compatible bug fixes.
+
+    Additional labels for prerelease and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
+
+Chrome Example
+
+"75.0.3770"
+
+Major: 75
+
+Minor: 0
+
+Patch: 3770
+
+
+Public Communication
+
+We should be publically releasing information on a consistent timeline to the public.  This does NOT mean every patch should be communicated.  Recommendations for releases are:
+
+    Every major release (whenever the major release is launched)
+    Weekly digests/summaries of of all minor and patch updates.
+
+Release notes should contain an overview of changes that went out from a PUBLIC perspective.  We do not have to list out ever bug fix unless it was a known issue communicated to us by the public (an example is fixing known / common login issues).
+
+
+Release Notes
+
+All Jira tickets need to have a "release notes" section added, and Product Owners are accountable for making sure that tickets have enough release note information to allow an end of week digest/summary to be created
+Release Version
+
+Version numbers only need to exist on services themselves, not on a specific version.  Examples:
+
+    Wax All Access:  v2.23.55
+    Wax Account:  v1.2.101
+    Item Creator:  v1.1.18
+    Crypto Service:  v0.1.19
+
+Internal Version
+
+These versions of code should be updated per bug fix, patch, or feature release.  Each service should maintain their own version internally. 
+External Versioning
+
+Externally, software should be versioned by only one specific number to treat the company as a whole.  
